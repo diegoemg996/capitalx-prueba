@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { DeleteButton } from "../components/DeleteButton";
 export const PersonaMoralColumns = [
+  { title: "RFC", dataIndex: "rfc", key: "rfc" },
   {
     title: "Nombre Comercial",
     dataIndex: "nombreComercial",
@@ -27,6 +28,7 @@ export const PersonaMoralColumns = [
 ];
 
 export const PersonaFisicaColumns = [
+  { title: "RFC", dataIndex: "rfc", key: "rfc" },
   {
     title: "Nombre",
     dataIndex: "nombre",

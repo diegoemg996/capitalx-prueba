@@ -43,7 +43,8 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
     },
   });
 
-  const { saveForm, setActiveTab } = useUsersStore();
+  const { saveForm, setActiveTab, personasFisicas, personasMorales } =
+    useUsersStore();
 
   const rfcPersonaMoralRegex = /^[A-Z&Ñ]{3}\d{6}[A-Z\d]{3}$/i;
   const rfcPersonaFisicaRegex = /^[A-Z]{4}\d{6}[A-Z\d]{3}$/i;
@@ -54,6 +55,13 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
       return "El RFC es obligatorio";
     }
 
+    if (
+      personasFisicas.find((persona) => persona.rfc === value) ||
+      personasMorales.find((persona) => persona.rfc === value)
+    ) {
+      return "El RFC ya existe";
+    }
+
     if (rfcPersonaMoralRegex.test(value)) {
       setTipoPersona("moral");
       return true;
@@ -62,6 +70,7 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
       setTipoPersona("fisica");
       return true;
     }
+
     setTipoPersona(null);
     return "RFC no válido";
   };
@@ -85,6 +94,7 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
     if (!tipoPersona) {
       return;
     }
+
     const cleanedData = cleanData(data);
     saveForm({ ...cleanedData, tipoPersona });
     setActiveTab(tipoPersona);
@@ -94,12 +104,19 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
   const cleanData = (data: FormData) => {
     const cleanedData = Object.keys(data).reduce((acc, key) => {
       const value = data[key as keyof FormData];
-      acc[key as keyof FormData] =
-        typeof value === "string"
-          ? value.trim().charAt(0).toUpperCase() + value.slice(1).toLowerCase()
-          : value;
+      if (key === "rfc") {
+        acc[key as keyof FormData] = value.trim();
+      } else {
+        acc[key as keyof FormData] =
+          typeof value === "string"
+            ? value.trim().charAt(0).toUpperCase() +
+              value.slice(1).toLowerCase()
+            : value;
+      }
+
       return acc;
     }, {} as FormData);
+
     return cleanedData;
   };
 

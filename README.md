@@ -1,50 +1,28 @@
-# React + TypeScript + Vite
+# Capital X - Prueba Tecnica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project setup
 
-Currently, two official plugins are available:
+Para ejecutar el proyecto, primero debes instalar las dependencias con el siguiente comando:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Luego, para iniciar el proyecto, ejecuta el siguiente comando:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+## Tech Stack
+
+- React
+- Ant Design
+- Zustand
+- Typescript
+- React Hook Form
+
+## Descripcion de la aplicacion
+
+Esta aplicación está diseñada para la gestión de personas físicas y morales. Cuenta con una tabla donde es posible agregar, editar y eliminar registros de personas. Además, incluye un formulario para facilitar el registro de nuevas personas de manera sencilla.
+Se utiliza React Hook Form para gestionar los formularios y Zustand para manejar el estado de la aplicación.

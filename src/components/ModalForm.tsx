@@ -96,7 +96,7 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
       const value = data[key as keyof FormData];
       acc[key as keyof FormData] =
         typeof value === "string"
-          ? value.trim().charAt(0).toUpperCase()
+          ? value.trim().charAt(0).toUpperCase() + value.slice(1).toLowerCase()
           : value;
       return acc;
     }, {} as FormData);

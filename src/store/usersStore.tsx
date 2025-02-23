@@ -23,12 +23,12 @@ interface PersonasMorales extends PersonaBase {
 interface UserStore {
   personasFisicas: PersonasFisicas[];
   personasMorales: PersonasMorales[];
-  activeTab: "fisica" | "moral";
+  activeTab: PersonaTipo;
   savePersonaFisica: (data: PersonasFisicas) => void;
   savePersonaMoral: (data: PersonasMorales) => void;
   deletePersonaFisica: (rfc: string) => void;
   deletePersonaMoral: (rfc: string) => void;
-  setActiveTab: (activeTab: "fisica" | "moral") => void;
+  setActiveTab: (activeTab: PersonaTipo) => void;
 }
 
 export const useUsersStore = create<UserStore>()(
@@ -65,7 +65,7 @@ export const useUsersStore = create<UserStore>()(
         }));
       },
 
-      setActiveTab: (activeTab: "fisica" | "moral") => {
+      setActiveTab: (activeTab: PersonaTipo) => {
         set({ activeTab });
       },
     }),

@@ -1,57 +1,64 @@
 import dayjs from "dayjs";
 import { DeleteButton } from "../components/DeleteButton";
-export const PersonaMoralColumns = [
-  { title: "RFC", dataIndex: "rfc", key: "rfc" },
-  {
-    title: "Nombre Comercial",
-    dataIndex: "nombreComercial",
-    key: "nombreComercial",
-  },
-  {
-    title: "Giro",
-    dataIndex: "giro",
-    key: "giro",
-  },
-  {
-    title: "Fecha de Constitución",
-    dataIndex: "fechaConstitucion",
-    key: "fechaConstitucion",
-    render: (date: string) => dayjs(date).format("DD/MM/YYYY"),
-  },
-  {
-    title: "Acciones",
-    key: "action",
-    render: (_: string, record: any) => (
-      <DeleteButton rfc={record.rfc} tipoPersona="moral" />
-    ),
-  },
-];
-
-export const PersonaFisicaColumns = [
-  { title: "RFC", dataIndex: "rfc", key: "rfc" },
-  {
-    title: "Nombre",
-    dataIndex: "nombre",
-    key: "nombre",
-  },
-  {
-    title: "Apellidos",
-    dataIndex: "apellidos",
-    key: "apellidos",
-  },
-  {
-    title: "Fecha de Nacimiento",
-    dataIndex: "Fecha de Nacimiento",
-    key: "fechaNacimiento",
-    render: (_: string, record: any) => {
-      return dayjs(record.fechaNacimiento).format("DD/MM/YYYY");
+import { useUsersStore } from "../store/usersStore";
+export const PersonaMoralColumns = () => {
+  const deletePersonaMoral = useUsersStore((state) => state.deletePersonaMoral);
+  return [
+    { title: "RFC", dataIndex: "rfc", key: "rfc" },
+    {
+      title: "Nombre Comercial",
+      dataIndex: "nombreComercial",
+      key: "nombreComercial",
     },
-  },
-  {
-    title: "Acciones",
-    key: "action",
-    render: (_: string, record: any) => (
-      <DeleteButton rfc={record.rfc} tipoPersona="fisica" />
-    ),
-  },
-];
+    {
+      title: "Giro",
+      dataIndex: "giro",
+      key: "giro",
+    },
+    {
+      title: "Fecha de Constitución",
+      dataIndex: "fechaConstitucion",
+      key: "fechaConstitucion",
+      render: (date: string) => dayjs(date).format("DD/MM/YYYY"),
+    },
+    {
+      title: "Acciones",
+      key: "action",
+      render: (_: string, record: any) => (
+        <DeleteButton rfc={record.rfc} deletePersona={deletePersonaMoral} />
+      ),
+    },
+  ];
+};
+
+export const PersonaFisicaColumns = () => {
+  const deletePersonaFisica = useUsersStore(
+    (state) => state.deletePersonaFisica
+  );
+  return [
+    { title: "RFC", dataIndex: "rfc", key: "rfc" },
+    {
+      title: "Nombre",
+      dataIndex: "nombre",
+      key: "nombre",
+    },
+    {
+      title: "Apellidos",
+      dataIndex: "apellidos",
+      key: "apellidos",
+    },
+    {
+      title: "Fecha de Nacimiento",
+      dataIndex: "fechaNacimiento",
+      key: "fechaNacimiento",
+      render: (date: string) => dayjs(date).format("DD/MM/YYYY"),
+    },
+    {
+      title: "Acciones",
+      key: "action",
+      render: (_: string, record: any) => (
+        <DeleteButton rfc={record.rfc} deletePersona={deletePersonaFisica} />
+      ),
+    },
+  ];
+};

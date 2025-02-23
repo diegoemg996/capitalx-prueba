@@ -17,7 +17,7 @@ export const UserTable = ({ setVisible }: UserTableProps) => {
       label: "Persona Física",
       children: (
         <Table
-          columns={PersonaFisicaColumns}
+          columns={PersonaFisicaColumns()}
           size="small"
           dataSource={personasFisicas}
           rowKey={(record) => record.rfc}
@@ -29,7 +29,7 @@ export const UserTable = ({ setVisible }: UserTableProps) => {
       label: "Persona Moral",
       children: (
         <Table
-          columns={PersonaMoralColumns}
+          columns={PersonaMoralColumns()}
           size="small"
           dataSource={personasMorales}
           rowKey={(record) => record.rfc}

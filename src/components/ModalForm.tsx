@@ -43,8 +43,13 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
     },
   });
 
-  const { saveForm, setActiveTab, personasFisicas, personasMorales } =
-    useUsersStore();
+  const {
+    savePersonaFisica,
+    savePersonaMoral,
+    setActiveTab,
+    personasFisicas,
+    personasMorales,
+  } = useUsersStore();
 
   const rfcPersonaMoralRegex = /^[A-Z&Ñ]{3}\d{6}[A-Z\d]{3}$/i;
   const rfcPersonaFisicaRegex = /^[A-Z]{4}\d{6}[A-Z\d]{3}$/i;
@@ -96,7 +101,13 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
     }
 
     const cleanedData = cleanData(data);
-    saveForm({ ...cleanedData, tipoPersona });
+
+    if (tipoPersona === "fisica") {
+      savePersonaFisica({ ...cleanedData, tipoPersona });
+    } else {
+      savePersonaMoral({ ...cleanedData, tipoPersona });
+    }
+
     setActiveTab(tipoPersona);
     handleClose();
   };

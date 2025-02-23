@@ -20,14 +20,14 @@ interface PersonasMorales extends PersonaBase {
   fechaConstitucion?: string | null;
 }
 
-type Persona = PersonasFisicas | PersonasMorales;
-
 interface UserStore {
   personasFisicas: PersonasFisicas[];
   personasMorales: PersonasMorales[];
   activeTab: "fisica" | "moral";
-  saveForm: (data: Persona) => void;
-  deleteUser: (rfc: string, tipoPersona: "fisica" | "moral") => void;
+  savePersonaFisica: (data: PersonasFisicas) => void;
+  savePersonaMoral: (data: PersonasMorales) => void;
+  deletePersonaFisica: (rfc: string) => void;
+  deletePersonaMoral: (rfc: string) => void;
   setActiveTab: (activeTab: "fisica" | "moral") => void;
 }
 
@@ -37,32 +37,32 @@ export const useUsersStore = create<UserStore>()(
       personasFisicas: [],
       personasMorales: [],
       activeTab: "fisica",
-
-      saveForm: (data: Persona) => {
-        if (data.tipoPersona === "fisica") {
-          set((state) => ({
-            personasFisicas: [...state.personasFisicas, data],
-          }));
-        } else if (data.tipoPersona === "moral") {
-          set((state) => ({
-            personasMorales: [...state.personasMorales, data],
-          }));
-        }
+      savePersonaFisica: (data: PersonasFisicas) => {
+        set((state) => ({
+          personasFisicas: [...state.personasFisicas, data],
+        }));
       },
-      deleteUser: (rfc: string, tipoPersona: "fisica" | "moral") => {
-        if (tipoPersona === "fisica") {
-          set((state) => ({
-            personasFisicas: state.personasFisicas.filter(
-              (persona) => persona.rfc !== rfc
-            ),
-          }));
-        } else if (tipoPersona === "moral") {
-          set((state) => ({
-            personasMorales: state.personasMorales.filter(
-              (persona) => persona.rfc !== rfc
-            ),
-          }));
-        }
+
+      savePersonaMoral: (data: PersonasMorales) => {
+        set((state) => ({
+          personasMorales: [...state.personasMorales, data],
+        }));
+      },
+
+      deletePersonaFisica: (rfc: string) => {
+        set((state) => ({
+          personasFisicas: state.personasFisicas.filter(
+            (persona) => persona.rfc !== rfc
+          ),
+        }));
+      },
+
+      deletePersonaMoral: (rfc: string) => {
+        set((state) => ({
+          personasMorales: state.personasMorales.filter(
+            (persona) => persona.rfc !== rfc
+          ),
+        }));
       },
 
       setActiveTab: (activeTab: "fisica" | "moral") => {

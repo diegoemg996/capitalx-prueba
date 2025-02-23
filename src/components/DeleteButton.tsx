@@ -1,16 +1,13 @@
 import { Button } from "antd";
-import { useUsersStore } from "../store/usersStore";
 
 interface DeleteButtonProps {
   rfc: string;
-  tipoPersona: "fisica" | "moral";
+  deletePersona: (rfc: string) => void;
 }
 
-export const DeleteButton = ({ rfc, tipoPersona }: DeleteButtonProps) => {
-  const { deleteUser } = useUsersStore();
-
+export const DeleteButton = ({ rfc, deletePersona }: DeleteButtonProps) => {
   const handleDelete = () => {
-    deleteUser(rfc, tipoPersona);
+    deletePersona(rfc);
   };
 
   return (

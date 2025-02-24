@@ -9,15 +9,15 @@ interface PersonaBase {
 }
 
 interface PersonasFisicas extends PersonaBase {
-  nombre?: string;
-  apellidos?: string;
-  fechaNacimiento?: string | null;
+  nombre: string;
+  apellidos: string;
+  fechaNacimiento: string | null;
 }
 
 interface PersonasMorales extends PersonaBase {
-  nombreComercial?: string;
-  giro?: string;
-  fechaConstitucion?: string | null;
+  nombreComercial: string;
+  giro: string;
+  fechaConstitucion: string | null;
 }
 
 interface UserStore {

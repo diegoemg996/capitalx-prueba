@@ -24,19 +24,25 @@ interface UserStore {
   personasFisicas: PersonasFisicas[];
   personasMorales: PersonasMorales[];
   activeTab: PersonaTipo;
+  isModalVisible: boolean;
   savePersonaFisica: (data: PersonasFisicas) => void;
   savePersonaMoral: (data: PersonasMorales) => void;
   deletePersonaFisica: (rfc: string) => void;
   deletePersonaMoral: (rfc: string) => void;
   setActiveTab: (activeTab: PersonaTipo) => void;
+  setModalVisible: (isModalVisible: boolean) => void;
 }
 
-export const useUsersStore = create<UserStore>()(
+export const useUsers = create<UserStore>()(
   persist(
     (set) => ({
       personasFisicas: [],
       personasMorales: [],
       activeTab: "fisica",
+      isModalVisible: false,
+      setModalVisible: (isModalVisible: boolean) => {
+        set({ isModalVisible });
+      },
       savePersonaFisica: (data: PersonasFisicas) => {
         set((state) => ({
           personasFisicas: [...state.personasFisicas, data],

@@ -2,12 +2,7 @@ import { Input, Modal, Button, Form, DatePicker } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { useUsersStore } from "../store/usersStore";
-
-interface ModalFormProps {
-  isModalOpen: boolean;
-  setVisible: (visible: boolean) => void;
-}
+import { useUsers } from "../store/usersStore";
 
 interface FormData {
   rfc: string;
@@ -19,7 +14,7 @@ interface FormData {
   nombreComercial: string;
 }
 
-export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
+export const ModalForm = () => {
   const [tipoPersona, setTipoPersona] = useState<"fisica" | "moral" | null>(
     null
   );
@@ -49,7 +44,9 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
     setActiveTab,
     personasFisicas,
     personasMorales,
-  } = useUsersStore();
+    setModalVisible,
+    isModalVisible,
+  } = useUsers();
 
   const rfcPersonaMoralRegex = /^[A-Z&Ñ]{3}\d{6}[A-Z\d]{3}$/i;
   const rfcPersonaFisicaRegex = /^[A-Z]{4}\d{6}[A-Z\d]{3}$/i;
@@ -90,7 +87,7 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
   };
 
   const handleClose = () => {
-    setVisible(false);
+    setModalVisible(false);
     setTipoPersona(null);
     reset();
   };
@@ -272,7 +269,7 @@ export const ModalForm = ({ isModalOpen, setVisible }: ModalFormProps) => {
   return (
     <Modal
       title="Registro de Persona"
-      open={isModalOpen}
+      open={isModalVisible}
       onCancel={handleClose}
       footer={null}
     >

@@ -1,15 +1,16 @@
 import { Button, Table, Tabs, Tooltip } from "antd";
 import { PersonaFisicaColumns, PersonaMoralColumns } from "../utils/getColumns";
 import { UserAddOutlined } from "@ant-design/icons";
-import { useUsersStore } from "../store/usersStore";
+import { useUsers } from "../store/usersStore";
 
-interface UserTableProps {
-  setVisible: (visible: boolean) => void;
-}
-
-export const UserTable = ({ setVisible }: UserTableProps) => {
-  const { personasFisicas, personasMorales, activeTab, setActiveTab } =
-    useUsersStore();
+export const UserTable = () => {
+  const {
+    personasFisicas,
+    personasMorales,
+    activeTab,
+    setActiveTab,
+    setModalVisible,
+  } = useUsers();
 
   const items = [
     {
@@ -55,7 +56,7 @@ export const UserTable = ({ setVisible }: UserTableProps) => {
             shape="circle"
             icon={<UserAddOutlined />}
             size="large"
-            onClick={() => setVisible(true)}
+            onClick={() => setModalVisible(true)}
           />
         </Tooltip>
         <Tabs

@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 import { DeleteButton } from "../components/DeleteButton";
-import { useUsersStore } from "../store/usersStore";
+import { useUsers } from "../store/usersStore";
 export const PersonaMoralColumns = () => {
-  const deletePersonaMoral = useUsersStore((state) => state.deletePersonaMoral);
+  const deletePersonaMoral = useUsers((state) => state.deletePersonaMoral);
   return [
     { title: "RFC", dataIndex: "rfc", key: "rfc" },
     {
@@ -32,9 +32,7 @@ export const PersonaMoralColumns = () => {
 };
 
 export const PersonaFisicaColumns = () => {
-  const deletePersonaFisica = useUsersStore(
-    (state) => state.deletePersonaFisica
-  );
+  const deletePersonaFisica = useUsers((state) => state.deletePersonaFisica);
   return [
     { title: "RFC", dataIndex: "rfc", key: "rfc" },
     {

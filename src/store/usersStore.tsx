@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware"; // Importa el middleware persist
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type PersonaTipo = "fisica" | "moral";
 
